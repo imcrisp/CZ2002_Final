@@ -3,9 +3,17 @@ import java.io.Serializable;
 
 import entity.Item;
 import entity.Staff;
-
+/**
+ * Initializing the constructors with data by serialization in the MainApp class
+ * @author Jeremy U Keat, Jordan Yuen Jia Jun, Lim Wee Tat Noel, Lin Run Yu
+ * @version 1.0
+ * @since 2021-11-13
+ */
 public class InitRes implements RestaurantMgr, Serializable{
 
+	/**
+	 * Data for initialization at the start
+	 */
     public void start(){
         //init items
         Item item1 = new Item("M01", 1, 3.50, "Chicken", "desc", "maincourse");
