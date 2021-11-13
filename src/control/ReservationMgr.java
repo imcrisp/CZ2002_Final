@@ -8,20 +8,44 @@ import java.util.ArrayList;
 import init.RestaurantMgr;
 import entity.Reservation;
 import entity.Table;
-
+/**
+ * The control class that handles the creation, removal and checking of reservations
+ * @author Jeremy U Keat, Jordan Yuen Jia Jun, Lim Wee Tat Noel, Lin Run Yu
+ * @version 1.0
+ * @since 2021-11-13
+ */
 public class ReservationMgr implements RestaurantMgr{
-	
+	/**
+	 * The number of reservations that have been made in the current session
+	 */
 	private int counterID;
+	/**
+	 * The array list that contains all reservations in the restaurant 
+	 * Stored in RestaurantMgr
+	 */
 	protected ArrayList<Reservation> reservationlist = new ArrayList<Reservation>();
+	/**
+	 * The array list that contains all tables in the restaurant
+	 * Stored in RestaurantMgr
+	 */
 	public ArrayList<Table> tablelist = new ArrayList<Table>();
-	Order order;
 	
+	/**
+	 * Constructor for the reservation manager class
+	 * Creates empty array for reservations and tables
+	 * Sets ID of reservations to start at 1.
+	 */
 	public ReservationMgr() {
 		this.reservationlist=new ArrayList<Reservation>();
 		this.tablelist=new ArrayList<Table>();
 		this.counterID=1;
 	}
-	
+	/**
+	 * creates the tables in the restaurant given a capacity and number of tables
+	 * @param total		total number of tables to be created 
+	 * @param capacity	initial capacity of the first table
+	 * 					this should be an even number which will increment by 2 till total is reached
+	 */
 	public void createTables(int total, int capacity) {
 		for (int i=0;i<total;i++) {
 			Table tabcreate= new Table(tablelist.size(),capacity, new Order(i));
@@ -32,8 +56,11 @@ public class ReservationMgr implements RestaurantMgr{
 	
 	
 	/**
-	 * Checks if there is a table open. If none are, return null
-	 * @return
+	 * Checks if there is a table that is open and has a high enough capacityfor the given pax
+	 *  If no tables are available, returns null
+	 * @param pax The number of customers to be seated at the table
+	 * @return	the table that is found to be available, or
+	 * 			null if no table can be found that can host the pax given
 	 */
 	
 	public Table checkAvailability(int pax) {
@@ -46,14 +73,21 @@ public class ReservationMgr implements RestaurantMgr{
 		}
 		return null;
 	}
-	
+	/**
+	 * Checks if a given table ID is out of bounds of the table array list
+	 * @param tableID the index of the table to be checked
+	 * @return true if the table is within the array list, or
+	 * 			false if the table is found to be out of bounds
+	 */
 	public boolean checkValid(int tableID){
 		if (tableID < 0 || tableID > tablelist.size() -1)
 			return false;
 			
 		return true;
 	}
-	
+	/**
+	 * Displays the id, capacity and vacancy of all individual tables in the restaurant 
+	 */
 	public void printTables() {
 		refreshReservations();
 		if (tablelist.size()==0) {
@@ -75,8 +109,9 @@ public class ReservationMgr implements RestaurantMgr{
 		}
 	}
 	/**
-	 * Requires contact of the person who reserved the spot.
-	 * @param contact
+	 * Displays the details of a reservation that was made given the customer contact
+	 * If no reservation can match the contact, displays to user that no reservation has been made for this contact
+	 * @param contact	The contact of the customer who made the reservation
 	 */
 	public void checkReservation(int contact) {
 		refreshReservations();
@@ -93,7 +128,16 @@ public class ReservationMgr implements RestaurantMgr{
 		}
 		System.out.println("There is no reservation made under this contact!");
 	}
-
+	/**
+	 * Allocates the reservation to a table given pax, contact, name, date and time
+	 * @param pax The amount of person seating at the table
+	 * @param contact The contact of the customer making this reservation
+	 * @param name The name of customer for this reservation
+	 * @param date The date of the reservation
+	 * @param time The time of the reservation
+	 * @return total number of reservations made at the current time if reservation was successfully allocated,
+	 * 			or -1 if the date and time of the reservation is in the past
+	 */
 	public int tableAllocate(int pax, int contact, String name, LocalDate date, LocalTime time){
 		//booking in the past
 		if (Duration.between(LocalDateTime.of(date,time), LocalDateTime.now()).toMinutes()>=0) {
@@ -121,9 +165,10 @@ public class ReservationMgr implements RestaurantMgr{
 		
 	}
 	/**
-	 * Conditions for table to be released:
-	 * 1. Order has been paid for
-	 * 2. Past 15 minutes of reservation
+	 * Removes a reservation given the customer's contact
+	 * @param contact	The contact of the customer's reservation
+	 * @return   1 if the removal of the reservation was successful, or
+	 * 			-1 if no reservations matching the contact could be found
 	 */
 	public int removeReservation(int contact) {
 		refreshReservations();
@@ -136,6 +181,12 @@ public class ReservationMgr implements RestaurantMgr{
 		}
 		return -1;
 	}
+	/**
+	 * Removes a reservation given the table ID number
+	 * @param	tableID	the table ID number of the reservation
+	 * @return   1 if the reservation was successfully removed
+	 * 			-1 if no reservations matching the table ID could be found
+	 */
 	public int removeRes(int tableID)
 	{
 		refreshReservations();
@@ -149,12 +200,8 @@ public class ReservationMgr implements RestaurantMgr{
 		return -1;
 	}
 	/**
-	 * This function will be used when listing all vacant tables that can be reserved
-	 * Listing is necessary when:
-	 * 1. Display all tables and their status
-	 * 2. Making a reservation
-	 * 3. Cancelling any reservations
-	 * 4. Checking reservations
+	 * Refreshes all the reservations in the restaurant by scanning through the reservation array,
+	 * checking if any reservations are already past 15 minutes of its booking time and removes them
 	 */
 	public void refreshReservations() {
 		//Check if there are any reservations that are already past the date and time

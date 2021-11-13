@@ -1,20 +1,51 @@
 package control;
 import java.util.ArrayList;
-
 import entity.Item;
 
+/**
+ * MenuItem class performs method on Item entity class, such as updating, removing, adding and checking for duplicate or if its empty
+ * @author Jeremy U Keat, Jordan Yuen Jia Jun, Lim Wee Tat Noel, Lin Run Yu
+ * @version 1.0
+ * @since 2021-11-13
+ */
 public class MenuItem{
 
+	/**
+	 * Name of meal type
+	 */
 	private String mealType;
+	/**
+	 * Item array list for Main course
+	 */
 	private ArrayList<Item> mainCourse = new ArrayList<Item>();
+	/**
+	 * Item array list for Drinks
+	 */
 	private ArrayList<Item> drinks = new ArrayList<Item>();
+	/**
+	 * Item array list for Sides
+	 */
 	private ArrayList<Item> sides = new ArrayList<Item>();
+	/**
+	 * Item array list for Dessert
+	 */
 	private ArrayList<Item> dessert = new ArrayList<Item>();
+	/**
+	 * Item array list for Set Meal
+	 */
 	private ArrayList<Item> setMeal = new ArrayList<Item>();
 
+	/**
+	 * Constructor for MenuItem
+	 */
 	public MenuItem(){
 		
 	}
+	/**
+	 * Check for the amount of item in a meal type
+	 * @param mealType Selected meal type
+	 * @return The amount of item inside the meal type
+	 */
 	public int checkMenuSize(String mealType){
 		if (mealType.equalsIgnoreCase("maincourse"))
 			return mainCourse.size();
@@ -30,6 +61,12 @@ public class MenuItem{
 
 	}
 
+	/**
+	 * Checks if there's a duplicate ID when trying to add item to menu
+	 * @param mealType Meal type name
+	 * @param itemID Item ID
+	 * @return Result if there contains a duplicate id inside the class
+	 */
 	public boolean duplicateID(String mealType, String itemID){
 		if (mealType.equalsIgnoreCase("maincourse")){
 			for (int i = 0; i<mainCourse.size(); i++){
@@ -69,6 +106,11 @@ public class MenuItem{
 		return false;
 	}
 
+	/**
+	 * Check if a given meal type is empty
+	 * @param mealType Meal type name
+	 * @return If meal type is empty
+	 */
 	public boolean isEmpty(String mealType){
 		if (mealType.equalsIgnoreCase("maincourse")  && mainCourse.size() == 0)
 			return true;
@@ -83,7 +125,12 @@ public class MenuItem{
 		
 		return false;
 	}
-
+	/**
+	 * Get the item inside the array list
+	 * @param mealType Name of meal type
+	 * @param index The index of the item
+	 * @return Selected item
+	 */
 	public Item getItem(String mealType, int index){
 		if (mealType.equalsIgnoreCase("maincourse"))
 			return mainCourse.get(index-1);
@@ -98,7 +145,10 @@ public class MenuItem{
 		
 		return null;
 	}
-
+	/**
+	 * Prints the menu of a given meal type
+	 * @param mealType Name of meal type
+	 */
 	public void printMenu(String mealType) {
 		// TODO - implement MenuItem.printMenu
 			if (mealType.equalsIgnoreCase("maincourse")){
@@ -206,8 +256,14 @@ public class MenuItem{
 			    }
 			}
 	}
-	
-
+	/**
+	 * Update an item's price, name, description, of selected item in a meal type
+	 * @param itemNumber Choice of item
+	 * @param price New price
+	 * @param name New name
+	 * @param description New description
+	 * @param mealType Choice of meal type
+	 */
 	public void updateMenu(int itemNumber, double price, String name, String description, String mealType){
 		if (mealType.equalsIgnoreCase("maincourse")){
 			mainCourse.get(itemNumber-1).setPrice(price);
@@ -236,7 +292,10 @@ public class MenuItem{
 		}
 		
 	}
-
+	/**
+	 * Add item into item array list of selected meal type
+	 * @param Item Item data
+	 */
 	public void addToMenu(Item Item) {
 		// TODO - implement MenuItem.addToMenu
 		mealType = Item.getMealType();
@@ -253,65 +312,60 @@ public class MenuItem{
 			setMeal.add(Item);
 	}
 
+	/**
+	 * Remove item from menu of a given meal type and index
+	 * @param mealType Meal type name
+	 * @param index Item index
+	 */
 	public void removeFromMenu(String mealType, int index) {
 		// TODO - implement MenuItem.removeFromMenu
 		if (mealType.equalsIgnoreCase("maincourse")) {
 			if(index ==0 || index > mainCourse.size())
 			{
-				System.out.println("Invalid index");
 				return;
 			}
 			else{
 				mainCourse.remove(index-1);
-		        System.out.println("Item removed!");
 
 				}
 			}
 		if (mealType.equalsIgnoreCase("drinks")){
 			if(index ==0 || index > drinks.size())
 			{
-				System.out.println("Invalid index");
 				return;
 			}
 			else {
 			drinks.remove(index-1);
-	        System.out.println("Item removed!");
 
 				}
 			}
 		if (mealType.equalsIgnoreCase("sides")) {
 			if(index ==0 || index > sides.size())
 			{
-				System.out.println("Invalid index");
 				return;
 			}
 			else {
 			sides.remove(index-1);
-	        System.out.println("Item removed!");
 
 			}
 		}
 		if (mealType.equalsIgnoreCase("dessert")) {
 			if(index ==0 || index > dessert.size())
 			{
-				System.out.println("Invalid index");
 				return;
 			}
 			else {
 			dessert.remove(index-1);
-	        System.out.println("Item removed!");
 
 			}
 		}
 		if (mealType.equalsIgnoreCase("setmeal")) {
 			if(index ==0 || index > setMeal.size())
 			{
-				System.out.println("Invalid index");
 				return;
 			}
 			else {
 			setMeal.remove(index-1);
-	        System.out.println("Item removed!");
 			}
 		}
 	}

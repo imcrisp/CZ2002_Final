@@ -11,18 +11,55 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 
-
+/**
+ * SalesMgr performs the request of the user which selects the format of sales report which will then use the Sales class to filter
+ * out stored invoice
+ * @author Jeremy U Keat, Jordan Yuen Jia Jun, Lim Wee Tat Noel, Lin Run Yu
+ * @version 1.0
+ * @since 2021-11-13
+ */
 public class SalesMgr implements RestaurantMgr{
-	ArrayList<Invoice> invoiceOrder = inv.sOrder;
-	ArrayList<Invoice> sortedInvoice = new ArrayList<Invoice>();
-	Invoice invoice = new Invoice();
-	Sales sale = new Sales();
+	/**
+	 * Assign a new invoice array list to the main invoice array list
+	 */
+	protected ArrayList<Invoice> invoiceOrder = inv.sOrder;
+	/**
+	 * Create a new invoice array list to store sorted data
+	 */
+	protected ArrayList<Invoice> sortedInvoice = new ArrayList<Invoice>();
+	/**
+	 * Initialize the invoice class to use the class methods to retrieve data
+	 */
+	private Invoice invoice = new Invoice();
+	/**
+	 * Initialize the sales class to use the sales class method to print sales revenue
+	 */
+	private Sales sale = new Sales();
+	/**
+	 * Format of the Sales report
+	 */
 	private reportFormat format;
+	/**
+	 * Format of the Sales report
+	 */
 	public enum reportFormat{
+		/**
+		 * Format in Day
+		 */
 		Day,
+		/**
+		 * Format in Month
+		 */
 		Month,
+		/**
+		 * Format in Year
+		 */
 		Year
 	}
+	/**
+	 * Selecting the format of the report to be printed
+	 * @param choice Format number
+	 */
 	public void printReport(int choice) {
 	    SimpleDateFormat sdf = new SimpleDateFormat();
         Scanner sc = new Scanner(System.in);
