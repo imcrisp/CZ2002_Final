@@ -179,7 +179,6 @@ public class MainApp implements RestaurantMgr {
     			}
     			catch (Exception e) {
     				System.out.println("The entered date is in the incorrect format!");
-    				e.printStackTrace();
     				continue;
     				
     			}
@@ -192,9 +191,7 @@ public class MainApp implements RestaurantMgr {
     				format2.parse(timein);
     			}
     			catch (Exception e) {
-    				System.out.println("The entered time is in the incorrect format!");
-    				e.printStackTrace();
-    				
+    				System.out.println("The entered time is in the incorrect format!");    				
     				continue;
     				
     			}
