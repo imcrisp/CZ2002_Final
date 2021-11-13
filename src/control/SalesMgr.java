@@ -108,6 +108,7 @@ public class SalesMgr implements RestaurantMgr{
 				{
 					System.out.println("Compling..");
 					sale.countSales(sortedInvoice);
+					sortedInvoice = new ArrayList<Invoice>();
 				}	
 
 				}catch (ParseException ex) {
@@ -148,6 +149,7 @@ public class SalesMgr implements RestaurantMgr{
 				{
 					System.out.println("Compling..");
 					sale.countSales(sortedInvoice);
+					sortedInvoice = new ArrayList<Invoice>();
 
 				}			
 				}
@@ -190,6 +192,7 @@ public class SalesMgr implements RestaurantMgr{
 				{
 					System.out.println("Compling..");
 					sale.countSales(sortedInvoice);
+					sortedInvoice = new ArrayList<Invoice>();
 				}
 				}catch (ParseException ex) {
 					System.out.println("Error, please try again..");

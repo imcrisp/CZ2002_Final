@@ -85,20 +85,20 @@ public class Order implements RestaurantMgr{
 	 * This index is different from the index of that item in the 'orderItems' ArrayList. 
 	 * @param tableNo The identification number of the table. 
 	 */
-    public void printOrder(int tableNo){
-    	System.out.println("=======================================================================================");
-    	System.out.println("Table No:"+ (tableNo+1) + "\t Created By: "+ res.tablelist.get(tableNo).order.staff.getStaffName());
-    	System.out.println("---------------------------------------------------------------------------------------");
-        System.out.println("No. \t"+ "Item Name. \t "+" Price."+"\t Qty.");
-        for (int i = 0; i<orderItems.size(); i++){
+	public void printOrder(int tableNo){
+	      System.out.println("=======================================================================================");
+	      System.out.println("Table No:"+ (tableNo+1) + "\t Created By: "+ res.tablelist.get(tableNo).order.staff.getStaffName());
+	      System.out.println("---------------------------------------------------------------------------------------");
+	        System.out.println("No \t"+ "Item Name \t "+" Price"+"\t Qty");
+	        for (int i = 0; i<orderItems.size(); i++){
 
-            System.out.println((i+1)+"\t"+ orderItems.get(i).getName()+"\t \t"+ orderItems.get(i).getPrice()+"\t\t"+ orderItems.get(i).getQuantity());
+	            //System.out.println((i+1)+"\t"+ orderItems.get(i).getName()+"\t \t"  + orderItems.get(i).getPrice()+"\t\t"   + orderItems.get(i).getQuantity());
+	            System.out.printf("%d      %8s           %.2f           %d\n", (i+1), orderItems.get(i).getName(), orderItems.get(i).getPrice(), orderItems.get(i).getQuantity());
 
-        }
-    	System.out.println("=======================================================================================");
-    	res.tablelist.get(tableNo).setStatus(true);
-    }
-
+	        }
+	      System.out.println("=======================================================================================");
+	      res.tablelist.get(tableNo).setStatus(true);
+	    }
     /**
      * This method removes the item from the 'orderItems' ArrayList.
      * Customer can either remove the items completely or reduce the items they have ordered.

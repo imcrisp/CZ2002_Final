@@ -39,15 +39,17 @@ public class Sales {
 	public void printSales() {
 		System.out.println("Sales Report");
 		System.out.println("==========================================================================");
-		System.out.println("Item sold: \t Qty: \t Price:");
+		System.out.println("Item sold:  \t  Qty:\tPrice:");
 		for(int i=0; i< filter.size();i++)
 		{
-			System.out.println(filter.get(i).getName()+ "\t \t"+filter.get(i).getQuantity()+"\t"+ filter.get(i).getPrice());
+			System.out.printf("%-20s %-2d  $%.2f%n",filter.get(i).getName(),filter.get(i).getQuantity(),filter.get(i).getPrice());
 			Revenue +=(filter.get(i).getPrice() * filter.get(i).getQuantity());
 		}
 		System.out.println("==========================================================================");
-		System.out.println("Revenue before taxes: $"+ Revenue);
+		System.out.printf("Revenue before taxes: $" +"%.2f \n",Revenue);
 		System.out.println("==========================================================================");
+		Revenue =0;
+		filter = new ArrayList<Item>();
 
 	}
 	/**

@@ -104,7 +104,7 @@ public class ReservationMgr implements RestaurantMgr{
 				s="Vacant";
 			}
 			System.out.println("Table ID "+(tablelist.get(i).gettableID()+1)+
-					"Capacity: "+tablelist.get(i).getCapacity()+
+					" Capacity: "+tablelist.get(i).getCapacity()+
 					" Status: "+ s );
 		}
 	}
