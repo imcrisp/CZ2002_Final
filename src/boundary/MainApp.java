@@ -9,9 +9,17 @@ import control.Invoice;
 import control.SalesMgr;
 import init.InitRes;
 import init.RestaurantMgr;
-
+/**
+ * Main body of the application
+ * @author Jeremy U Keat, Jordan Yuen Jia Jun, Lim Wee Tat Noel, Lin Run Yu
+ * @version 1.0
+ * @since 2021-11-13
+ */
 public class MainApp implements RestaurantMgr {
-
+	/**
+	 * Request for users input and perform what has been request
+	 * @param args Main UI
+	 */
     public static void main(String[] args){
         
         try{
@@ -239,7 +247,12 @@ public class MainApp implements RestaurantMgr {
                 	System.out.println("Select Table to print order invoice");
                 	System.out.println("Select Table 1-5");
                     tableID = scan.nextInt();
-                	System.out.println("Are is customer a member? (Y/N)");
+                    if(!res.checkValid(tableID))
+                    {
+                    	System.out.println("Out of range");
+                    	break;
+                    }
+                    System.out.println("Are is customer a member? (Y/N)");
                 	choice = scan.next().charAt(0);
                 	if(choice == 'Y')
                 	{
@@ -308,6 +321,9 @@ public class MainApp implements RestaurantMgr {
         }
     }
 
+    /**
+     * The main menu of the application
+     */
     public static void displayAppMenu(){
         System.out.println("----------------------------------------------------------");
         System.out.println("1. Create/Update/Remove menu item");
@@ -326,6 +342,9 @@ public class MainApp implements RestaurantMgr {
         System.out.println("----------------------------------------------------------");
     }
 
+    /**
+     * Prints option when user selects option 1
+     */
     public static void caseOne(){
         System.out.println("------------------------------");
         System.out.println("1. Create menu item");
@@ -333,7 +352,9 @@ public class MainApp implements RestaurantMgr {
         System.out.println("3. Remove menu item");
         System.out.println("------------------------------");
     }
-
+    /**
+     * Prints option when user selects option 2
+     */
     public static void caseTwo(){
         System.out.println("------------------------------");
         System.out.println("1. Create promotion");

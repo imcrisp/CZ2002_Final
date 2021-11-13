@@ -1,18 +1,49 @@
 package boundary;
 import java.util.Scanner;
-
 import init.RestaurantMgr;
 import entity.Item;
+
+/**
+ * MenuItemMgr boundary class takes in user input to input item 
+ * @author Jeremy U Keat, Jordan Yuen Jia Jun, Lim Wee Tat Noel, Lin Run Yu
+ * @version 1.0
+ * @since 2021-11-13
+ */
 public class MenuItemMgr implements RestaurantMgr {
 
-    Scanner scan = new Scanner(System.in);
+	/**
+	 * To scan user input
+	 */
+    private Scanner scan = new Scanner(System.in);
+    /**
+     * Quantity of item
+     */
     private int quantity;
+    /**
+     * Price of item
+     */
     private double price;
+    /**
+     * Name of item
+     */
     private String name;
+    /**
+     * Description of item
+     */
     private String description;
+    /**
+     * Meal type of item
+     */
     private String mealType;
+    /**
+     * ID of item
+     */
     private String itemID;
 
+    /**
+     * Add item into the item array list of the menu
+     * @param target Determine if set meal or ala carte. If its true its a set meal else its ala carte.
+     */
     public void addItemToMenu(boolean target){
 
         if (target){
@@ -46,6 +77,10 @@ public class MenuItemMgr implements RestaurantMgr {
         }    
     }
 
+    /**
+     * Update item inside the item array list of the menu
+     * @param target Determine if set meal or ala carte. If its true its a set meal else its ala carte.
+     */
     public void updateItemInMenu(boolean target){
         if (target){
             mealType = "setmeal";
@@ -86,7 +121,10 @@ public class MenuItemMgr implements RestaurantMgr {
             menu.printMenu(mealType);
         }    
     }
-
+    /**
+     * Remove item from item array list of the menu
+     * @param target Determine if set meal or ala carte. If its true its a set meal else its ala carte.
+     */
     public void removeItemFromMenu(boolean target){
         if (target){
             mealType = "setmeal";
